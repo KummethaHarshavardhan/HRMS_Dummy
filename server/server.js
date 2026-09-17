@@ -46,7 +46,7 @@ import { errorHandler, notFoundHandler } from "./middlewares/errorHandler.js";
 const app = express();
 
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: "https://hrms-dummy-moe6j9h-krmu-922a.vercel.app",
     credentials: true,
 }));
 
