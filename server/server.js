@@ -45,10 +45,46 @@ import { errorHandler, notFoundHandler } from "./middlewares/errorHandler.js";
 
 const app = express();
 
-app.use(cors({
-    origin: "https://hrms-dummy-moe6j9h-krmu-922a.vercel.app",
+const allowedOrigins = [
+    "https://hrms-dummy-nine.vercel.app",
+    "https://hrms-dummy-moe6j9h-krmu-922a.vercel.app",
+    "http://localhost:5173",
+    "http://localhost:3000",
+    "http://localhost:5000",
+];
+
+const corsOptions = {
+    origin: (origin, callback) => {
+        if (!origin) return callback(null, true);
+
+        const envOrigins = (process.env.CLIENT_URL || "")
+            .split(",")
+            .map((o) => o.trim())
+            .filter(Boolean);
+
+        const isAllowed =
+            allowedOrigins.includes(origin) ||
+            envOrigins.includes(origin) ||
+            /^https:\/\/hrms-dummy[a-z0-9-]*\.vercel\.app$/i.test(origin);
+
+        if (isAllowed) {
+            return callback(null, true);
+        }
+        return callback(null, false);
+    },
     credentials: true,
-}));
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+    allowedHeaders: [
+        "Content-Type",
+        "Authorization",
+        "X-Requested-With",
+        "Accept",
+        "Origin",
+    ],
+    optionsSuccessStatus: 204,
+};
+
+app.use(cors(corsOptions));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
