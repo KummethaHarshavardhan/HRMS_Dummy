@@ -18,7 +18,7 @@ const route = express.Router();
 
 route.post('/passkey',passkey);
 route.post("/newEmp", EmpRegister);
-route.post("/Emplogin", EmpLogin);
+route.post(["/Emplogin", "/emplogin", "/login"], EmpLogin);
 
 route.post("/googleLogin", googleLogin);
 route.post("/sendOtp", EmpOtp);

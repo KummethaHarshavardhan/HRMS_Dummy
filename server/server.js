@@ -45,10 +45,84 @@ import { errorHandler, notFoundHandler } from "./middlewares/errorHandler.js";
 
 const app = express();
 
-app.use(cors({
-    origin: "https://hrms-dummy-moe6j9h-krmu-922a.vercel.app",
+const allowedOrigins = [
+    "https://hrms-dummy-nine.vercel.app",
+    "https://hrms-dummy-moe6j9h-krmu-922a.vercel.app",
+    "http://localhost:5173",
+    "http://localhost:3000",
+    "http://localhost:5000",
+    "http://127.0.0.1:5173",
+    "http://127.0.0.1:3000",
+];
+
+const isOriginAllowed = (origin) => {
+    // Allow requests with no origin (e.g., mobile apps, curl, Postman)
+    if (!origin) return true;
+
+    // Direct match against known origins
+    if (allowedOrigins.includes(origin)) return true;
+
+    // Match CLIENT_URL env variable (supports comma-separated list)
+    if (process.env.CLIENT_URL) {
+        const envOrigins = process.env.CLIENT_URL.split(",").map((o) => o.trim()).filter(Boolean);
+        if (envOrigins.includes(origin)) return true;
+    }
+
+    try {
+        const parsed = new URL(origin);
+
+        // Allow localhost on any port for local development
+        if (parsed.hostname === "localhost" || parsed.hostname === "127.0.0.1") {
+            return true;
+        }
+
+        // Allow any Vercel production or preview deployment for this project
+        // (matches e.g. hrms-dummy-*.vercel.app, hrms-dummy-nine.vercel.app, etc.)
+        if (
+            parsed.hostname.endsWith(".vercel.app") &&
+            (parsed.hostname.startsWith("hrms-dummy") || parsed.hostname.includes("hrms-dummy"))
+        ) {
+            return true;
+        }
+    } catch {
+        return false;
+    }
+
+    return false;
+};
+
+const corsOptions = {
+    origin: (origin, callback) => {
+        if (isOriginAllowed(origin)) {
+            return callback(null, true);
+        }
+        return callback(null, false);
+    },
     credentials: true,
-}));
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS", "HEAD"],
+    allowedHeaders: [
+        "Content-Type",
+        "Authorization",
+        "X-Requested-With",
+        "Accept",
+        "Origin",
+        "Access-Control-Request-Method",
+        "Access-Control-Request-Headers",
+    ],
+    exposedHeaders: ["Content-Range", "X-Content-Range"],
+    optionsSuccessStatus: 204,
+    maxAge: 86400,
+};
+
+app.use(cors(corsOptions));
+
+// Explicit fallback to ensure OPTIONS preflights always respond with 204
+app.use((req, res, next) => {
+    if (req.method === "OPTIONS") {
+        return res.sendStatus(204);
+    }
+    next();
+});
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
