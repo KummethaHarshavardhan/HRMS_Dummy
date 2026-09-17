@@ -1,0 +1,657 @@
+/* ==========================================================================
+   Super Admin Payroll & Compensation Management Styles
+   Modern, enterprise glassmorphism with high visual polish
+   ========================================================================== */
+
+.sa-payroll-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 24px;
+  max-width: 1600px;
+  margin: 0 auto;
+  min-height: 100vh;
+  color: var(--text-primary, #0f172a);
+}
+
+/* Page Header */
+.sa-payroll-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.98));
+  color: #ffffff;
+  padding: 24px 28px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 30px -10px rgba(15, 23, 42, 0.4);
+}
+
+.sa-payroll-header-title {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0 0 6px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sa-payroll-header-title .header-icon {
+  color: #818cf8;
+}
+
+.sa-payroll-header-subtitle {
+  font-size: 14px;
+  color: #94a3b8;
+  margin: 0;
+}
+
+.sa-payroll-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* Big Hero Card: Total Sending Amount */
+.sa-payroll-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.sa-kpi-card {
+  position: relative;
+  overflow: hidden;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 22px 24px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 18px -4px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.sa-kpi-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px -6px rgba(0, 0, 0, 0.09);
+}
+
+/* Highlight "Total Sending Amount" Card */
+.sa-kpi-card.hero-sending-card {
+  background: linear-gradient(135deg, #4f46e5 0%, #3730a3 100%);
+  color: #ffffff;
+  border: none;
+  box-shadow: 0 10px 25px -5px rgba(79, 70, 229, 0.4);
+}
+
+.sa-kpi-card.hero-sending-card .kpi-label {
+  color: #c7d2fe;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.sa-kpi-card.hero-sending-card .kpi-amount-val {
+  color: #ffffff;
+  font-size: 34px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 6px 0;
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.sa-kpi-card.hero-sending-card .kpi-amount-val .curr-suffix {
+  font-size: 20px;
+  font-weight: 600;
+  opacity: 0.85;
+}
+
+.sa-kpi-card.hero-sending-card .kpi-footer-note {
+  color: #e0e7ff;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.sa-kpi-card .kpi-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.sa-kpi-card .kpi-label {
+  font-size: 13px;
+  color: #64748b;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.sa-kpi-card .kpi-icon-pill {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.kpi-icon-pill.indigo {
+  background: rgba(99, 102, 241, 0.12);
+  color: #6366f1;
+}
+
+.kpi-icon-pill.emerald {
+  background: rgba(16, 185, 129, 0.12);
+  color: #10b981;
+}
+
+.kpi-icon-pill.amber {
+  background: rgba(245, 158, 11, 0.12);
+  color: #f59e0b;
+}
+
+.sa-kpi-card .kpi-amount-val {
+  font-size: 28px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 4px 0 6px;
+}
+
+.sa-kpi-card .kpi-footer-note {
+  font-size: 12px;
+  color: #64748b;
+}
+
+/* Toolbar & Filters */
+.sa-payroll-toolbar {
+  background: #ffffff;
+  border-radius: 14px;
+  border: 1px solid #e2e8f0;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.sa-toolbar-filters {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  flex: 1;
+}
+
+.sa-filter-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.sa-filter-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.sa-select-input {
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 7px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #1e293b;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.sa-select-input:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+}
+
+.sa-search-box {
+  position: relative;
+  min-width: 240px;
+}
+
+.sa-search-box .search-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #94a3b8;
+  font-size: 15px;
+}
+
+.sa-search-input {
+  width: 100%;
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 7px 12px 7px 32px;
+  font-size: 13px;
+  color: #1e293b;
+  outline: none;
+}
+
+.sa-search-input:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+}
+
+/* Pay All Employees Hero Button */
+.btn-pay-all {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: #ffffff !important;
+  border: none !important;
+  font-weight: 700 !important;
+  font-size: 14px !important;
+  padding: 10px 22px !important;
+  border-radius: 10px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  box-shadow: 0 6px 16px -2px rgba(16, 185, 129, 0.45) !important;
+  transition: all 0.2s ease !important;
+  cursor: pointer;
+}
+
+.btn-pay-all:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px -2px rgba(16, 185, 129, 0.55) !important;
+  filter: brightness(1.05);
+}
+
+.btn-pay-all:disabled {
+  background: #94a3b8 !important;
+  box-shadow: none !important;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* Table Card & Cell Custom Styling */
+.sa-payroll-table-card {
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 18px -4px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.emp-id-badge {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 12px;
+  font-weight: 700;
+  color: #4338ca;
+  background: #eef2ff;
+  border: 1px solid #c7d2fe;
+  padding: 4px 8px;
+  border-radius: 6px;
+  display: inline-block;
+}
+
+.emp-name-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.emp-name-title {
+  font-weight: 700;
+  color: #0f172a;
+  font-size: 14px;
+}
+
+.emp-meta-tags {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  font-size: 11px;
+}
+
+.role-pill {
+  font-weight: 600;
+  padding: 1px 6px;
+  border-radius: 4px;
+}
+
+.role-pill.hr {
+  background: #ede9fe;
+  color: #6d28d9;
+}
+
+.role-pill.employee {
+  background: #e0f2fe;
+  color: #0369a1;
+}
+
+.org-pill {
+  color: #64748b;
+  font-size: 11px;
+}
+
+.account-num-sub {
+  font-family: monospace;
+  font-size: 11px;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 1px;
+}
+
+.salary-val-cell {
+  font-weight: 700;
+  color: #0f172a;
+  font-size: 13.5px;
+}
+
+.salary-yearly-val {
+  font-weight: 600;
+  color: #334155;
+  font-size: 13px;
+}
+
+.remaining-val-cell {
+  font-weight: 700;
+  color: #0284c7;
+  font-size: 13.5px;
+}
+
+.remaining-subtext {
+  font-size: 11px;
+  color: #64748b;
+}
+
+/* Pay Salary Button in Row */
+.btn-row-pay {
+  background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);
+  color: #ffffff;
+  border: none;
+  font-weight: 600;
+  font-size: 12.5px;
+  padding: 6px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.15s ease;
+  box-shadow: 0 2px 6px rgba(79, 70, 229, 0.25);
+}
+
+.btn-row-pay:hover:not(:disabled) {
+  transform: translateY(-1px);
+  filter: brightness(1.08);
+  box-shadow: 0 4px 10px rgba(79, 70, 229, 0.35);
+}
+
+.btn-row-paid {
+  background: #f0fdf4;
+  color: #15803d;
+  border: 1px solid #bbf7d0;
+  font-weight: 600;
+  font-size: 12px;
+  padding: 5px 12px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  cursor: default;
+}
+
+/* Bonus Button & Cooldown Lock */
+.btn-bonus-pay {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  color: #ffffff;
+  border: none;
+  font-weight: 600;
+  font-size: 12px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.15s ease;
+  box-shadow: 0 2px 6px rgba(245, 158, 11, 0.25);
+}
+
+.btn-bonus-pay:hover:not(:disabled) {
+  transform: translateY(-1px);
+  filter: brightness(1.08);
+}
+
+.btn-bonus-locked {
+  background: #f8fafc;
+  color: #64748b;
+  border: 1px solid #e2e8f0;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 5px 10px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  cursor: not-allowed;
+  max-width: 175px;
+  text-align: left;
+}
+
+/* Status Badges */
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.status-pill.sent {
+  background: #dcfce7;
+  color: #15803d;
+  border: 1px solid #86efac;
+}
+
+.status-pill.pending {
+  background: #fef3c7;
+  color: #b45309;
+  border: 1px solid #fde68a;
+}
+
+/* Modal Content Styles */
+.modal-detail-box {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.modal-detail-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 0;
+  font-size: 13.5px;
+  border-bottom: 1px dashed #e2e8f0;
+}
+
+.modal-detail-row:last-child {
+  border-bottom: none;
+}
+
+.modal-detail-label {
+  color: #64748b;
+  font-weight: 500;
+}
+
+.modal-detail-value {
+  color: #0f172a;
+  font-weight: 600;
+}
+
+.modal-amount-highlight {
+  font-size: 20px;
+  font-weight: 800;
+  color: #16a34a;
+}
+
+.modal-bonus-highlight {
+  font-size: 20px;
+  font-weight: 800;
+  color: #d97706;
+}
+
+.modal-alert-info {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 12.5px;
+  color: #1e40af;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  line-height: 1.5;
+}
+
+.modal-alert-warning {
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 12.5px;
+  color: #92400e;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  line-height: 1.5;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+/* Live Yearly Salary Preview Box */
+.edit-salary-preview-card {
+  background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%);
+  border: 1px solid #c7d2fe;
+  border-radius: 12px;
+  padding: 14px 18px;
+  margin: 12px 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.preview-card-left {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.preview-card-title {
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #4338ca;
+}
+
+.preview-card-formula {
+  font-size: 11.5px;
+  color: #6366f1;
+  font-weight: 500;
+}
+
+.preview-card-amount {
+  font-size: 24px;
+  font-weight: 800;
+  color: #3730a3;
+  letter-spacing: -0.01em;
+}
+
+/* 2-Column Form Grid for Bank Fields */
+.form-grid-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+@media (max-width: 600px) {
+  .form-grid-2col {
+    grid-template-columns: 1fr;
+  }
+}
+
+.form-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.form-field-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: #334155;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.form-field-input {
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 13px;
+  color: #0f172a;
+  outline: none;
+  transition: all 0.15s ease;
+}
+
+.form-field-input:focus {
+  border-color: #6366f1;
+  background: #ffffff;
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+}
+
+.bank-meta {
+  color: #475569;
+  font-size: 10.5px;
+  font-weight: 500;
+  background: #f1f5f9;
+  padding: 1px 5px;
+  border-radius: 4px;
+  border: 1px solid #e2e8f0;
+}

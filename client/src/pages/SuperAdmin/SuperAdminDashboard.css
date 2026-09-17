@@ -1,0 +1,316 @@
+/* ==========================================
+   SUPER ADMIN DASHBOARD STYLES
+   Adheres to Enterprise Design System
+   ========================================== */
+
+.sa-dashboard-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  padding-bottom: var(--space-8);
+}
+
+/* Header */
+.sa-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.sa-header-intro h1 {
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-1);
+}
+
+.sa-header-intro p {
+  font-size: var(--font-size-sm);
+  color: var(--text-muted);
+}
+
+.sa-header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+/* KPI Stats Grid */
+.sa-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--space-5);
+}
+
+.sa-stat-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-normal);
+}
+
+.sa-stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--primary-200);
+}
+
+.sa-stat-icon-wrapper {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.sa-icon-blue {
+  background: var(--primary-50);
+  color: var(--primary-600);
+}
+
+.sa-icon-purple {
+  background: #f5f3ff;
+  color: #7c3aed;
+}
+
+.sa-icon-green {
+  background: var(--success-bg);
+  color: var(--success-text);
+}
+
+.sa-icon-amber {
+  background: var(--warning-bg);
+  color: var(--warning-text);
+}
+
+.sa-stat-details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.sa-stat-details p {
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.sa-stat-details h2 {
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.2;
+}
+
+.sa-trend-text {
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  margin-top: var(--space-1);
+}
+
+/* Quick Nav Cards */
+.sa-nav-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-4);
+}
+
+.sa-nav-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: var(--space-4) var(--space-5);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-normal);
+}
+
+.sa-nav-card:hover {
+  border-color: var(--primary-400);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.sa-nav-card-body {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.sa-nav-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-sm);
+  background: var(--primary-50);
+  color: var(--primary-600);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.sa-nav-card h3 {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--text-main);
+  margin-bottom: 2px;
+}
+
+.sa-nav-card p {
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+  line-height: 1.3;
+}
+
+.sa-nav-arrow {
+  color: var(--slate-400);
+  transition: var(--transition-fast);
+}
+
+.sa-nav-card:hover .sa-nav-arrow {
+  color: var(--primary-600);
+  transform: translateX(3px);
+}
+
+/* Two Column Tables Grid */
+.sa-tables-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-6);
+}
+
+@media (max-width: 1024px) {
+  .sa-tables-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Status Badges */
+.sa-status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+}
+
+.sa-status-active {
+  background: var(--success-bg);
+  color: var(--success-text);
+  border: 1px solid var(--success-border);
+}
+
+.sa-status-inactive {
+  background: var(--slate-100);
+  color: var(--slate-600);
+  border: 1px solid var(--slate-200);
+}
+
+.sa-status-role {
+  background: #eff6ff;
+  color: #1d4ed8;
+  border: 1px solid #bfdbfe;
+}
+
+/* Modal Form Controls */
+.sa-modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-2) 0;
+}
+
+.sa-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+}
+
+@media (max-width: 640px) {
+  .sa-form-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.sa-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.sa-form-label {
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--slate-700);
+}
+
+.sa-form-label span {
+  color: var(--danger);
+}
+
+.sa-form-input,
+.sa-form-select {
+  height: 38px;
+  padding: 0 var(--space-3);
+  font-size: var(--font-size-sm);
+  font-family: inherit;
+  color: var(--text-main);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  outline: none;
+  transition: var(--transition-fast);
+}
+
+.sa-form-input:focus,
+.sa-form-select:focus {
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+}
+
+.sa-password-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.sa-password-box .sa-form-input {
+  width: 100%;
+  padding-right: 36px;
+}
+
+.sa-password-toggle {
+  position: absolute;
+  right: 10px;
+  background: none;
+  border: none;
+  color: var(--slate-400);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sa-password-toggle:hover {
+  color: var(--slate-600);
+}

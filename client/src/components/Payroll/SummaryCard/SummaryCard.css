@@ -1,0 +1,105 @@
+.pr-summary-card {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  padding: 20px 22px !important;
+  background: #ffffff !important;
+  border-radius: 14px !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04) !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+  height: 100% !important;
+  box-sizing: border-box !important;
+  min-width: 0 !important;
+  overflow: hidden !important;
+  text-align: left !important;
+}
+
+.pr-summary-card:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08) !important;
+}
+
+.pr-summary-card-content {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 6px !important;
+  min-width: 0 !important;
+  flex: 1 !important;
+  text-align: left !important;
+}
+
+.pr-summary-card-title {
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  color: #64748b !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  text-align: left !important;
+  margin: 0 !important;
+}
+
+.pr-summary-card-value {
+  font-size: clamp(1.2rem, 1.8vw, 1.5rem) !important;
+  font-weight: 800 !important;
+  color: #0f172a !important;
+  line-height: 1.2 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  max-width: 100% !important;
+  text-align: left !important;
+  margin: 2px 0 !important;
+}
+
+.pr-summary-card-subtitle {
+  font-size: 12px !important;
+  color: #94a3b8 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  text-align: left !important;
+}
+
+.pr-summary-card-icon {
+  width: 48px !important;
+  height: 48px !important;
+  border-radius: 12px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 22px !important;
+  flex-shrink: 0 !important;
+  margin-left: 14px !important;
+}
+
+/* Color Variants */
+.pr-summary-card-primary .pr-summary-card-icon,
+.pr-summary-card-default .pr-summary-card-icon {
+  background: #f5f4fb !important;
+  color: #6c5ce7 !important;
+}
+
+.pr-summary-card-success .pr-summary-card-icon {
+  background: #ecfdf5 !important;
+  color: #10b981 !important;
+}
+
+.pr-summary-card-warning .pr-summary-card-icon {
+  background: #fffbeb !important;
+  color: #f59e0b !important;
+}
+
+.pr-summary-card-danger .pr-summary-card-icon {
+  background: #fef2f2 !important;
+  color: #ef4444 !important;
+}
+
+.pr-summary-card-info .pr-summary-card-icon {
+  background: #e0f2fe !important;
+  color: #0284c7 !important;
+}

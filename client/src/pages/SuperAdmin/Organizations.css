@@ -1,0 +1,228 @@
+/* ==========================================
+   ORGANIZATIONS PAGE STYLES
+   ========================================== */
+
+.orgs-page-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  padding-bottom: var(--space-8);
+}
+
+.orgs-page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.orgs-page-header h1 {
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-1);
+}
+
+.orgs-page-header p {
+  font-size: var(--font-size-sm);
+  color: var(--text-muted);
+}
+
+.orgs-filter-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-5);
+  flex-wrap: wrap;
+}
+
+.orgs-search-box {
+  position: relative;
+  flex: 1;
+  min-width: 280px;
+}
+
+.orgs-search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--slate-400);
+}
+
+.orgs-search-box input {
+  width: 100%;
+  height: 38px;
+  padding: 0 var(--space-3) 0 36px;
+  font-size: var(--font-size-sm);
+  font-family: inherit;
+  color: var(--text-main);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  outline: none;
+  transition: var(--transition-fast);
+}
+
+.orgs-search-box input:focus {
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+}
+
+.orgs-filter-group {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.orgs-filter-group label {
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.orgs-filter-select {
+  height: 38px;
+  padding: 0 var(--space-3);
+  font-size: var(--font-size-sm);
+  font-family: inherit;
+  color: var(--text-main);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  outline: none;
+  cursor: pointer;
+}
+
+.org-icon-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  background: var(--primary-50);
+  color: var(--primary-600);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.org-code-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 8px;
+  background: #ede9fe;
+  color: #5b21b6;
+  font-weight: 700;
+  font-size: 11px;
+  border-radius: 4px;
+  letter-spacing: 0.03em;
+}
+
+/* Status Interactive Toggle Button */
+.sa-status-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: var(--transition-fast);
+  outline: none;
+}
+
+.toggle-active {
+  background: var(--success-bg);
+  color: var(--success-text);
+  border: 1px solid var(--success-border);
+}
+
+.toggle-active:hover {
+  background: #fee2e2;
+  color: #dc2626;
+  border-color: #fca5a5;
+}
+
+.toggle-inactive {
+  background: var(--slate-100);
+  color: var(--slate-600);
+  border: 1px solid var(--slate-300);
+}
+
+.toggle-inactive:hover {
+  background: #dcfce7;
+  color: #166534;
+  border-color: #86efac;
+}
+
+/* Capacity meter */
+.capacity-bar-track {
+  width: 100%;
+  height: 6px;
+  background: var(--slate-200);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.capacity-bar-fill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  transition: width 0.3s ease;
+}
+
+.fill-normal {
+  background: var(--primary-600);
+}
+
+.fill-warning {
+  background: var(--warning);
+}
+
+.fill-danger {
+  background: var(--danger);
+}
+
+/* Section Divider in Modal */
+.sa-section-divider {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) 0;
+  margin-bottom: var(--space-3);
+  border-bottom: 1px solid var(--border-color);
+  color: var(--primary-600);
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+}
+
+/* View Employees Modal Table */
+.view-emp-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--font-size-xs);
+  text-align: left;
+}
+
+.view-emp-table th {
+  background: var(--bg-surface);
+  padding: 10px 12px;
+  color: var(--slate-600);
+  font-weight: 700;
+  border-bottom: 2px solid var(--border-color);
+  white-space: nowrap;
+}
+
+.view-emp-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-main);
+  vertical-align: middle;
+}
+
+.view-emp-table tr:hover {
+  background: #f8fafc;
+}

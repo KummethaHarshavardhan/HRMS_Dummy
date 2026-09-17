@@ -1,0 +1,112 @@
+/* ==========================================
+   ORGANIZATION USAGE & LIMITS PAGE STYLES
+   ========================================== */
+
+.usage-page-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  padding-bottom: var(--space-8);
+}
+
+.usage-page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.usage-page-header h1 {
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-1);
+}
+
+.usage-page-header p {
+  font-size: var(--font-size-sm);
+  color: var(--text-muted);
+}
+
+/* Stats Cards */
+.usage-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--space-5);
+}
+
+.usage-stat-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-normal);
+}
+
+.usage-stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.usage-stat-icon-wrapper {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.usage-icon-blue {
+  background: var(--primary-50);
+  color: var(--primary-600);
+}
+
+.usage-icon-purple {
+  background: #f5f3ff;
+  color: #7c3aed;
+}
+
+.usage-icon-green {
+  background: var(--success-bg);
+  color: var(--success-text);
+}
+
+.usage-icon-amber {
+  background: var(--warning-bg);
+  color: var(--warning-text);
+}
+
+.usage-stat-details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.usage-stat-details p {
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.usage-stat-details h2 {
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.2;
+}
+
+.usage-trend-text {
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+  margin-top: var(--space-1);
+}

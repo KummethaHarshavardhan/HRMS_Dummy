@@ -1,0 +1,952 @@
+/* ==========================================
+   WORK FROM HOME (WFH) MANAGEMENT STYLES
+   ========================================== */
+
+.wfh-page-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding-bottom: 3rem;
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* ── Page Header ─────────────────────────────────────────── */
+.wfh-page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.wfh-header-title-box {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.wfh-header-icon-badge {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #4f46e5 0%, #3730a3 100%);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+}
+
+.wfh-page-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0 0 0.25rem 0;
+}
+
+.wfh-page-subtitle {
+  font-size: 0.875rem;
+  color: #64748b;
+  margin: 0;
+}
+
+.wfh-refresh-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  color: #334155;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.wfh-refresh-btn:hover:not(:disabled) {
+  background-color: #f8fafc;
+  border-color: #94a3b8;
+  color: #0f172a;
+}
+
+.wfh-spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ── Role Notice Banners ─────────────────────────────────── */
+.wfh-notice-banner {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.875rem 1.25rem;
+  border-radius: 10px;
+  font-size: 0.875rem;
+  line-height: 1.4;
+}
+
+.wfh-notice-banner.hr-banner {
+  background-color: #f0f9ff;
+  border: 1px solid #bae6fd;
+  color: #0369a1;
+}
+
+.wfh-notice-banner.superadmin-banner {
+  background-color: #f5f3ff;
+  border: 1px solid #ddd6fe;
+  color: #5b21b6;
+}
+
+.wfh-banner-icon {
+  flex-shrink: 0;
+}
+
+/* ── Stats Summary Grid ──────────────────────────────────── */
+.wfh-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 1rem;
+}
+
+.wfh-stat-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem;
+  border-radius: 12px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.wfh-stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.wfh-stat-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wfh-stat-card.total .wfh-stat-icon {
+  background: #e0e7ff;
+  color: #4338ca;
+}
+
+.wfh-stat-card.pending .wfh-stat-icon {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.wfh-stat-card.approved .wfh-stat-icon {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.wfh-stat-card.rejected .wfh-stat-icon {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.wfh-stat-data {
+  display: flex;
+  flex-direction: column;
+}
+
+.wfh-stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1e293b;
+  line-height: 1.2;
+}
+
+.wfh-stat-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-top: 0.2rem;
+}
+
+/* ── Control Bar ─────────────────────────────────────────── */
+.wfh-controls-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+}
+
+.wfh-search-box {
+  position: relative;
+  flex: 1;
+  min-width: 260px;
+  max-width: 420px;
+}
+
+.wfh-search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #94a3b8;
+}
+
+.wfh-search-input {
+  width: 100%;
+  padding: 0.6rem 2.2rem 0.6rem 2.25rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  outline: none;
+  background-color: #f8fafc;
+  transition: all 0.2s;
+}
+
+.wfh-search-input:focus {
+  background-color: #ffffff;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+}
+
+.wfh-clear-search {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 2px;
+}
+
+.wfh-clear-search:hover {
+  color: #475569;
+}
+
+.wfh-filters-group {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.wfh-filter-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.wfh-filter-label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #475569;
+}
+
+.wfh-select {
+  padding: 0.55rem 0.85rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  color: #1e293b;
+  background: #ffffff;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.wfh-select:focus {
+  border-color: #6366f1;
+}
+
+/* ── Table Card ──────────────────────────────────────────── */
+.wfh-table-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.wfh-table-loading {
+  padding: 4rem 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.wfh-table-responsive {
+  overflow-x: auto;
+}
+
+.wfh-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.875rem;
+}
+
+.wfh-table th {
+  background-color: #f8fafc;
+  color: #475569;
+  font-weight: 600;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.875rem 1rem;
+  border-bottom: 1px solid #e2e8f0;
+  white-space: nowrap;
+}
+
+.wfh-table td {
+  padding: 1rem;
+  border-bottom: 1px solid #f1f5f9;
+  vertical-align: middle;
+}
+
+.wfh-table tr:hover {
+  background-color: #f8fafc;
+}
+
+.text-right {
+  text-align: right;
+}
+
+/* ── Table Cells ─────────────────────────────────────────── */
+.wfh-emp-cell {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.wfh-emp-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #4f46e5 0%, #06b6d4 100%);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 0.875rem;
+  flex-shrink: 0;
+}
+
+.wfh-emp-name {
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.wfh-emp-meta {
+  font-size: 0.75rem;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.1rem;
+}
+
+.wfh-meta-dot {
+  color: #cbd5e1;
+}
+
+.wfh-emp-email {
+  font-size: 0.75rem;
+  color: #94a3b8;
+}
+
+.wfh-org-badge {
+  display: inline-block;
+  padding: 0.25rem 0.6rem;
+  background-color: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #334155;
+  white-space: nowrap;
+}
+
+.wfh-dates-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.wfh-date-range {
+  font-weight: 500;
+  color: #1e293b;
+  white-space: nowrap;
+}
+
+.wfh-duration-pill {
+  display: inline-block;
+  align-self: flex-start;
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+  background-color: #eff6ff;
+  color: #2563eb;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.wfh-reason-cell {
+  max-width: 220px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #334155;
+}
+
+.wfh-attachments-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.wfh-attach-count-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #64748b;
+}
+
+.wfh-file-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.wfh-file-pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.2rem 0.5rem;
+  background-color: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  color: #334155;
+  cursor: pointer;
+  transition: all 0.2s;
+  max-width: 140px;
+}
+
+.wfh-file-pill-btn:hover {
+  background-color: #e2e8f0;
+  color: #0f172a;
+}
+
+.wfh-file-name-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.wfh-no-files {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  font-style: italic;
+}
+
+/* ── Status Badges ───────────────────────────────────────── */
+.wfh-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.wfh-status-badge.pending {
+  background-color: #fef3c7;
+  color: #92400e;
+  border: 1px solid #fde68a;
+}
+
+.wfh-status-badge.approved {
+  background-color: #dcfce7;
+  color: #166534;
+  border: 1px solid #bbf7d0;
+}
+
+.wfh-status-badge.rejected {
+  background-color: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+}
+
+.wfh-status-badge.withdrawn {
+  background-color: #f1f5f9;
+  color: #475569;
+  border: 1px solid #cbd5e1;
+}
+
+.wfh-stat-card.withdrawn .wfh-stat-icon {
+  background: #f1f5f9;
+  color: #64748b;
+}
+
+.wfh-notice-banner.employee-banner {
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  color: #334155;
+}
+
+.wfh-action-btn.withdraw-btn {
+  background-color: #f8fafc;
+  color: #64748b;
+  border: 1px solid #cbd5e1;
+}
+
+.wfh-action-btn.withdraw-btn:hover {
+  background-color: #fee2e2;
+  border-color: #fca5a5;
+  color: #dc2626;
+}
+
+.wfh-modal-decision-box.withdrawn {
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+}
+
+.wfh-decision-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.wfh-decided-at {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #334155;
+}
+
+.wfh-decided-by {
+  font-size: 0.75rem;
+  color: #64748b;
+}
+
+.wfh-rejection-tag {
+  font-size: 0.7rem;
+  color: #b91c1c;
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  background: #fef2f2;
+  padding: 0.1rem 0.35rem;
+  border-radius: 4px;
+  margin-top: 0.2rem;
+}
+
+.wfh-pending-hint {
+  font-size: 0.75rem;
+  color: #94a3b8;
+}
+
+/* ── Actions ─────────────────────────────────────────────── */
+.wfh-actions-group {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.wfh-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.4rem 0.65rem;
+  border-radius: 6px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s;
+}
+
+.wfh-action-btn.view-btn {
+  background-color: #f1f5f9;
+  color: #475569;
+}
+
+.wfh-action-btn.view-btn:hover {
+  background-color: #e2e8f0;
+  color: #0f172a;
+}
+
+.wfh-action-btn.approve-btn {
+  background-color: #10b981;
+  color: #ffffff;
+}
+
+.wfh-action-btn.approve-btn:hover {
+  background-color: #059669;
+}
+
+.wfh-action-btn.reject-btn {
+  background-color: #ef4444;
+  color: #ffffff;
+}
+
+.wfh-action-btn.reject-btn:hover {
+  background-color: #dc2626;
+}
+
+/* ── Empty State ─────────────────────────────────────────── */
+.wfh-empty-state {
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.wfh-empty-icon {
+  color: #cbd5e1;
+  margin-bottom: 1rem;
+}
+
+.wfh-empty-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #334155;
+  margin: 0 0 0.5rem 0;
+}
+
+.wfh-empty-desc {
+  font-size: 0.875rem;
+  color: #64748b;
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+/* ── Modals Styling ──────────────────────────────────────── */
+.wfh-modal-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.wfh-modal-title.success {
+  color: #10b981;
+}
+
+.wfh-modal-title.danger {
+  color: #ef4444;
+}
+
+.wfh-detail-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.wfh-modal-status-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.wfh-modal-req-date {
+  font-size: 0.8125rem;
+  color: #64748b;
+}
+
+.wfh-modal-info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  background-color: #f8fafc;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.wfh-info-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.wfh-info-label {
+  font-size: 0.75rem;
+  color: #64748b;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.wfh-info-value {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin-top: 0.15rem;
+}
+
+.wfh-modal-period-box {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 8px;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.wfh-period-dates {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.wfh-period-sub {
+  font-size: 0.75rem;
+  color: #3b82f6;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.wfh-period-dates h4 {
+  margin: 0.15rem 0 0 0;
+  font-size: 1rem;
+  color: #1e3a8a;
+}
+
+.wfh-period-arrow {
+  font-size: 1.25rem;
+  color: #60a5fa;
+}
+
+.wfh-period-total {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  font-size: 0.875rem;
+  color: #1e40af;
+}
+
+.wfh-modal-reason-box {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.wfh-section-label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #475569;
+}
+
+.wfh-reason-text {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  color: #334155;
+  white-space: pre-wrap;
+  line-height: 1.5;
+}
+
+.wfh-files-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.wfh-file-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6rem 0.85rem;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+}
+
+.wfh-file-item-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.wfh-file-icon {
+  color: #6366f1;
+}
+
+.wfh-filename {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #1e293b;
+}
+
+.wfh-filesize {
+  font-size: 0.75rem;
+  color: #94a3b8;
+}
+
+.wfh-file-download-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.65rem;
+  background-color: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #334155;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.wfh-file-download-btn:hover {
+  background-color: #e2e8f0;
+}
+
+.wfh-no-files-text {
+  font-size: 0.875rem;
+  color: #94a3b8;
+  font-style: italic;
+  margin: 0.25rem 0 0 0;
+}
+
+.wfh-modal-decision-box {
+  padding: 0.875rem 1rem;
+  border-radius: 8px;
+}
+
+.wfh-modal-decision-box.approved {
+  background-color: #f0fdf4;
+  border: 1px solid #bbf7d0;
+}
+
+.wfh-modal-decision-box.rejected {
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+}
+
+.wfh-decision-details {
+  font-size: 0.875rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-top: 0.35rem;
+}
+
+.wfh-decision-reason-text {
+  color: #b91c1c;
+}
+
+.wfh-modal-footer-dual {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.wfh-footer-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.wfh-confirm-body,
+.wfh-reject-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  font-size: 0.875rem;
+  color: #334155;
+}
+
+.wfh-confirm-emp-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  padding: 0.85rem;
+  border-radius: 8px;
+}
+
+.wfh-confirm-emp-card strong {
+  font-size: 1rem;
+  color: #1e293b;
+}
+
+.wfh-confirm-org {
+  font-size: 0.8125rem;
+  color: #64748b;
+}
+
+.wfh-confirm-note {
+  font-size: 0.8125rem;
+  color: #64748b;
+  margin: 0;
+}
+
+.wfh-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.wfh-form-label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #334155;
+}
+
+.wfh-form-label .required {
+  color: #ef4444;
+}
+
+.wfh-textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-family: inherit;
+  outline: none;
+  resize: vertical;
+  transition: border-color 0.2s;
+}
+
+.wfh-textarea:focus {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+}
+
+.wfh-hint {
+  font-size: 0.75rem;
+  color: #64748b;
+}

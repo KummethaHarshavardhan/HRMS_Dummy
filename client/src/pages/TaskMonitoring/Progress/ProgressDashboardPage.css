@@ -1,0 +1,701 @@
+/* ==========================================================================
+   PROGRESS MONITORING DASHBOARD - UI & UX (Matching Reference Photos 2 & 3)
+   ========================================================================== */
+
+.pm-dashboard-container {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 4px 0 32px 0;
+  color: var(--pm-text, #0f172a);
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* --------------------------------------------------------------------------
+   THEME VARIABLES
+   Default: "portal" (Honors portal's usual background while styling cards cleanly)
+   Dark Deck: Matches Photo 2 & Photo 3 1:1 with dark navy palette
+   -------------------------------------------------------------------------- */
+.pm-theme-portal {
+  --pm-bg-card: #ffffff;
+  --pm-bg-card-hover: #f8fafc;
+  --pm-border-card: #e2e8f0;
+  --pm-border-subtle: #f1f5f9;
+  --pm-text-title: #0f172a;
+  --pm-text-muted: #64748b;
+  --pm-text-caption: #94a3b8;
+  --pm-table-bg: #ffffff;
+  --pm-table-header-bg: #f8fafc;
+  --pm-table-border: #e2e8f0;
+  --pm-table-hover: #f8fafc;
+  --pm-progress-track: #e2e8f0;
+  --pm-action-bg: #f1f5f9;
+  --pm-action-border: #cbd5e1;
+  --pm-action-text: #1e293b;
+  --pm-action-hover: #e2e8f0;
+}
+
+.pm-theme-dark {
+  --pm-bg-card: #121c2e;
+  --pm-bg-card-hover: #16243b;
+  --pm-border-card: #1f2e47;
+  --pm-border-subtle: #16233a;
+  --pm-text-title: #f8fafc;
+  --pm-text-muted: #94a3b8;
+  --pm-text-caption: #64748b;
+  --pm-table-bg: #10192a;
+  --pm-table-header-bg: #0c1322;
+  --pm-table-border: #1a273e;
+  --pm-table-hover: #142035;
+  --pm-progress-track: #1e293b;
+  --pm-action-bg: #162238;
+  --pm-action-border: #223554;
+  --pm-action-text: #e2e8f0;
+  --pm-action-hover: #1f304d;
+}
+
+/* --------------------------------------------------------------------------
+   HEADER SECTION
+   -------------------------------------------------------------------------- */
+.pm-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding-bottom: 4px;
+}
+
+.pm-header-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.pm-header-title {
+  margin: 0;
+  font-size: 1.65rem;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  color: var(--pm-text-title);
+}
+
+.pm-header-subtitle {
+  margin: 0;
+  font-size: 0.92rem;
+  color: var(--pm-text-muted);
+}
+
+.pm-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* Theme Toggle Pill */
+.pm-theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  background: var(--pm-bg-card);
+  border: 1px solid var(--pm-border-card);
+  border-radius: 999px;
+  padding: 3px;
+  gap: 2px;
+}
+
+.pm-theme-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 5px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 999px;
+  color: var(--pm-text-muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+
+.pm-theme-btn.active {
+  background: #3b82f6;
+  color: #ffffff;
+  box-shadow: 0 1px 4px rgba(59, 130, 246, 0.4);
+}
+
+/* Header Buttons */
+.pm-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+}
+
+.pm-btn-secondary {
+  background: var(--pm-bg-card);
+  color: var(--pm-text-title);
+  border: 1px solid var(--pm-border-card);
+}
+
+.pm-btn-secondary:hover {
+  background: var(--pm-bg-card-hover);
+  border-color: #3b82f6;
+}
+
+.pm-btn-primary {
+  background: #0284c7;
+  color: #ffffff;
+  border: 1px solid #0284c7;
+  box-shadow: 0 1px 3px rgba(2, 132, 199, 0.3);
+}
+
+.pm-btn-primary:hover:not(:disabled) {
+  background: #0369a1;
+  border-color: #0369a1;
+}
+
+.pm-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.pm-spin {
+  animation: pmSpin 1s linear infinite;
+}
+
+@keyframes pmSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* --------------------------------------------------------------------------
+   SECTION 1: TOP 6 METRIC CARDS GRID
+   -------------------------------------------------------------------------- */
+.pm-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+@media (max-width: 1200px) {
+  .pm-metrics-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .pm-metrics-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.pm-metric-card {
+  background: var(--pm-bg-card);
+  border: 1px solid var(--pm-border-card);
+  border-radius: 12px;
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.pm-metric-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  border-color: rgba(59, 130, 246, 0.4);
+}
+
+.pm-metric-icon-box {
+  width: 46px;
+  height: 46px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+
+.pm-icon-blue {
+  background: rgba(37, 99, 235, 0.12);
+  color: #3b82f6;
+  border: 1px solid rgba(37, 99, 235, 0.25);
+}
+
+.pm-icon-cyan {
+  background: rgba(6, 182, 212, 0.12);
+  color: #06b6d4;
+  border: 1px solid rgba(6, 182, 212, 0.25);
+}
+
+.pm-icon-activity {
+  background: rgba(14, 165, 233, 0.12);
+  color: #0ea5e9;
+  border: 1px solid rgba(14, 165, 233, 0.25);
+}
+
+.pm-icon-indigo {
+  background: rgba(129, 140, 248, 0.12);
+  color: #818cf8;
+  border: 1px solid rgba(129, 140, 248, 0.25);
+}
+
+.pm-icon-green {
+  background: rgba(16, 185, 129, 0.12);
+  color: #10b981;
+  border: 1px solid rgba(16, 185, 129, 0.25);
+}
+
+.pm-icon-red {
+  background: rgba(239, 68, 68, 0.12);
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.25);
+}
+
+.pm-metric-details {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.pm-metric-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--pm-text-caption);
+  margin-bottom: 4px;
+}
+
+.pm-metric-value {
+  font-size: 1.75rem;
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--pm-text-title);
+  letter-spacing: -0.02em;
+}
+
+.pm-metric-subtext {
+  font-size: 12px;
+  color: var(--pm-text-muted);
+  margin-top: 4px;
+}
+
+.pm-metric-subtext-danger {
+  color: #ef4444 !important;
+  font-weight: 600;
+}
+
+/* --------------------------------------------------------------------------
+   SECTION 2: DEADLINE & TIMELINESS CLASSIFICATION
+   -------------------------------------------------------------------------- */
+.pm-section-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pm-section-header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.pm-section-title {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--pm-text-title);
+  letter-spacing: -0.015em;
+}
+
+.pm-section-subtitle {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--pm-text-muted);
+}
+
+.pm-deadlines-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 14px;
+}
+
+@media (max-width: 1024px) {
+  .pm-deadlines-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .pm-deadlines-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.pm-deadline-card {
+  background: var(--pm-bg-card);
+  border: 1px solid var(--pm-border-card);
+  border-radius: 10px;
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-left: 4px solid transparent;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pm-deadline-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.07);
+}
+
+.pm-border-teal {
+  border-left-color: #06b6d4 !important;
+}
+
+.pm-border-amber {
+  border-left-color: #f59e0b !important;
+}
+
+.pm-border-red {
+  border-left-color: #ef4444 !important;
+}
+
+.pm-border-sky {
+  border-left-color: #38bdf8 !important;
+}
+
+.pm-border-slate {
+  border-left-color: #64748b !important;
+}
+
+.pm-deadline-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--pm-text-caption);
+  margin-bottom: 8px;
+}
+
+.pm-deadline-value {
+  font-size: 1.65rem;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--pm-text-title);
+  letter-spacing: -0.02em;
+}
+
+/* --------------------------------------------------------------------------
+   SECTION 3: CANDIDATE PROGRESS & WORKLOAD VELOCITY TABLE
+   -------------------------------------------------------------------------- */
+.pm-table-container {
+  background: var(--pm-table-bg);
+  border: 1px solid var(--pm-table-border);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+}
+
+.pm-table-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.pm-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.pm-table th {
+  background: var(--pm-table-header-bg);
+  color: var(--pm-text-caption);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--pm-table-border);
+  white-space: nowrap;
+}
+
+.pm-table td {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--pm-border-subtle);
+  vertical-align: middle;
+  font-size: 13px;
+}
+
+.pm-table tbody tr {
+  transition: background-color 0.15s ease;
+}
+
+.pm-table tbody tr:hover {
+  background-color: var(--pm-table-hover);
+}
+
+.pm-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Column 1: Candidate Name */
+.pm-cand-name-box {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.pm-cand-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--pm-text-title);
+}
+
+.pm-cand-email {
+  font-size: 11px;
+  color: var(--pm-text-muted);
+}
+
+/* Column 2: Team */
+.pm-cand-team {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--pm-text-title);
+}
+
+/* Column 3: Task Breakdown */
+.pm-breakdown-tokens {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.pm-token-comp {
+  color: #10b981;
+}
+
+.pm-token-prog {
+  color: #06b6d4;
+}
+
+.pm-token-sub {
+  color: #818cf8;
+}
+
+.pm-token-pend {
+  color: var(--pm-text-muted);
+}
+
+.pm-token-sep {
+  color: var(--pm-text-caption);
+  font-size: 10px;
+}
+
+/* Column 4: Overdue Alert */
+.pm-badge-overdue {
+  display: inline-block;
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  color: #f87171;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  padding: 3px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+.pm-text-zero-overdue {
+  color: var(--pm-text-muted);
+  font-size: 12px;
+}
+
+/* Column 5: Overall Progress */
+.pm-progress-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 140px;
+  max-width: 200px;
+}
+
+.pm-progress-header {
+  display: flex;
+  align-items: center;
+  font-size: 11px;
+  color: var(--pm-text-muted);
+  font-weight: 500;
+}
+
+.pm-progress-pct {
+  margin-left: 6px;
+  font-weight: 700;
+  color: var(--pm-text-title);
+}
+
+.pm-progress-bar-track {
+  width: 100%;
+  height: 6px;
+  background: var(--pm-progress-track);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.pm-progress-bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.4s ease;
+}
+
+.pm-fill-green {
+  background: #10b981;
+}
+
+.pm-fill-blue {
+  background: #3b82f6;
+}
+
+/* Column 6: Action Button */
+.pm-action-profile-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--pm-action-bg);
+  border: 1px solid var(--pm-action-border);
+  color: var(--pm-action-text);
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.pm-action-profile-btn:hover {
+  background: var(--pm-action-hover);
+  border-color: #3b82f6;
+  color: #3b82f6;
+}
+
+/* Empty State */
+.pm-empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--pm-text-muted);
+  font-size: 14px;
+}
+
+/* --------------------------------------------------------------------------
+   TEAM PROGRESS BREAKDOWN MODAL
+   -------------------------------------------------------------------------- */
+.pm-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(4px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: pmFadeIn 0.2s ease-out;
+}
+
+.pm-modal-card {
+  background: var(--pm-bg-card);
+  border: 1px solid var(--pm-border-card);
+  border-radius: 16px;
+  width: 100%;
+  max-width: 840px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+  animation: pmSlideUp 0.25s ease-out;
+}
+
+.pm-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--pm-table-border);
+}
+
+.pm-modal-title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--pm-text-title);
+}
+
+.pm-modal-subtitle {
+  margin: 4px 0 0 0;
+  font-size: 0.85rem;
+  color: var(--pm-text-muted);
+}
+
+.pm-modal-close-btn {
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: var(--pm-text-muted);
+  padding: 6px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.15s ease, background-color 0.15s ease;
+}
+
+.pm-modal-close-btn:hover {
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.1);
+}
+
+.pm-modal-body {
+  padding: 20px 24px;
+  overflow-y: auto;
+}
+
+.pm-modal-footer {
+  padding: 16px 24px;
+  border-top: 1px solid var(--pm-table-border);
+  display: flex;
+  justify-content: flex-end;
+}
+
+@keyframes pmFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes pmSlideUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}

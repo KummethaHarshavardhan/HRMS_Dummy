@@ -1,0 +1,112 @@
+/* ==========================================
+   HR MANAGEMENT PAGE STYLES
+   ========================================== */
+
+.hr-page-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  padding-bottom: var(--space-8);
+}
+
+.hr-page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.hr-page-header h1 {
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-1);
+}
+
+.hr-page-header p {
+  font-size: var(--font-size-sm);
+  color: var(--text-muted);
+}
+
+.hr-filter-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-5);
+  flex-wrap: wrap;
+}
+
+.hr-search-box {
+  position: relative;
+  flex: 1;
+  min-width: 260px;
+}
+
+.hr-search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--slate-400);
+}
+
+.hr-search-box input {
+  width: 100%;
+  height: 38px;
+  padding: 0 var(--space-3) 0 36px;
+  font-size: var(--font-size-sm);
+  font-family: inherit;
+  color: var(--text-main);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  outline: none;
+  transition: var(--transition-fast);
+}
+
+.hr-search-box input:focus {
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+}
+
+.hr-filter-group {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.hr-filter-group label {
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.hr-filter-select {
+  height: 38px;
+  padding: 0 var(--space-3);
+  font-size: var(--font-size-sm);
+  font-family: inherit;
+  color: var(--text-main);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  outline: none;
+  cursor: pointer;
+}
+
+.hr-avatar-initials {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-full);
+  background: #ede9fe;
+  color: #6d28d9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: var(--font-size-xs);
+  flex-shrink: 0;
+}
