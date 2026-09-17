@@ -1,4 +1,4 @@
-const PROFILE_URL = "/api/employees/profile";
+const PROFILE_URL = `${import.meta.env.VITE_API_URL}/api/employees/profile`;
 
 const getAuthHeaders = () => {
   const token = localStorage.getItem("token");

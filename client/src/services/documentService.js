@@ -1,4 +1,4 @@
-const API_BASE = "/api/documents";
+const API_BASE = `${import.meta.env.VITE_API_URL}/api/documents`;
 
 const getAuthHeaders = (isMultipart = false) => {
   const token = localStorage.getItem("token");

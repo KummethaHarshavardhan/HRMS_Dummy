@@ -1,4 +1,4 @@
-const API_BASE = "/api/wfh-requests";
+const API_BASE = `${import.meta.env.VITE_API_URL}/api/wfh-requests`;
 
 const getAuthHeaders = (isMultipart = false) => {
   const token = localStorage.getItem("token");

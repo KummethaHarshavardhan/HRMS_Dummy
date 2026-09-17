@@ -1,4 +1,4 @@
-const API_BASE = "/api/reviews";
+const API_BASE = `${import.meta.env.VITE_API_URL}/api/reviews`;
 
 const getAuthHeaders = () => {
   const token = localStorage.getItem("token");

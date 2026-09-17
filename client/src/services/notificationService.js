@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API = "http://localhost:5000/api/notifications";
+const API = `${import.meta.env.VITE_API_URL}/api/notifications`;
 
 const getAuthConfig = () => ({
   headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },

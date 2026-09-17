@@ -1,4 +1,4 @@
-const API_BASE = "/api/offboarding";
+const API_BASE = `${import.meta.env.VITE_API_URL}/api/offboarding`;
 
 const getAuthHeaders = () => {
   const token = localStorage.getItem("token");
