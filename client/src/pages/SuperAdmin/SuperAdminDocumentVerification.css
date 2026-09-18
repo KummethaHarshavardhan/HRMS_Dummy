@@ -463,3 +463,78 @@
 .sa-badge-rejected:hover {
   background: #fecaca;
 }
+
+/* ── Table Horizontal Scroll ─────────────────────────────── */
+.sa-doc-table-card .hrms-table-scroll-body {
+  overflow-x: auto;
+  width: 100%;
+  -webkit-overflow-scrolling: touch;
+}
+
+.sa-doc-table-card .hrms-table {
+  width: 100%;
+  min-width: 800px;
+}
+
+/* ── Responsive Breakpoints ──────────────────────────────── */
+@media (max-width: 768px) {
+  .sa-doc-page {
+    padding: 16px;
+    gap: 16px;
+  }
+
+  .sa-doc-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+  }
+
+  .sa-doc-stats {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+
+  .sa-doc-stat-card {
+    padding: 8px 12px;
+    gap: 8px;
+  }
+
+  .sa-doc-filter-panel {
+    padding: 14px 16px;
+  }
+
+  .sa-doc-filter-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .sa-doc-filter-controls {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+
+  .sa-doc-filter-group {
+    min-width: 100%;
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .sa-doc-page {
+    padding: 12px;
+  }
+
+  .sa-doc-stats {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .sa-doc-title h1 {
+    font-size: 20px;
+  }
+}
+

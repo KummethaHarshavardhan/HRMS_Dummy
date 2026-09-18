@@ -266,6 +266,8 @@
 
 .exit-table-wrapper {
   overflow-x: auto;
+  width: 100%;
+  -webkit-overflow-scrolling: touch;
   border: 1px solid #e2e8f0;
   border-radius: 10px;
   background: #ffffff;
@@ -273,6 +275,7 @@
 
 .exit-table {
   width: 100%;
+  min-width: 640px;
   border-collapse: collapse;
   text-align: left;
   font-size: 13px;
@@ -299,4 +302,78 @@
 .exit-table tr:hover td {
   background: #f8fafc;
 }
+
+/* ── Responsive Breakpoints ──────────────────────────────── */
+@media (max-width: 768px) {
+  .onboarding-page {
+    padding: 16px;
+    gap: 16px;
+  }
+
+  .onboarding-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .checklist-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 14px;
+  }
+
+  .checklist-card > div:first-child {
+    width: 100%;
+  }
+
+  .checklist-card > div:last-child {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .clearance-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .exit-pkg-container {
+    padding: 16px;
+    gap: 16px;
+  }
+
+  .exit-pkg-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .exit-pkg-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .onboarding-page {
+    padding: 12px;
+  }
+
+  .exit-pkg-container {
+    padding: 12px;
+  }
+
+  .exit-doc-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .exit-doc-actions button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
 

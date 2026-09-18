@@ -120,3 +120,46 @@
   color: #4f46e5;
   border-bottom-color: #4f46e5;
 }
+
+/* ── Modal Form Grid ──────────────────────────────────────── */
+.asset-modal-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+/* ── Responsive Breakpoints ──────────────────────────────── */
+@media (max-width: 768px) {
+  .assets-page {
+    padding: 16px;
+    gap: 16px;
+  }
+
+  .assets-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .asset-nav-tabs {
+    overflow-x: auto;
+    width: 100%;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+  }
+
+  .asset-modal-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .assets-page {
+    padding: 12px;
+  }
+
+  .assets-header-text h1 {
+    font-size: 20px;
+  }
+}
+

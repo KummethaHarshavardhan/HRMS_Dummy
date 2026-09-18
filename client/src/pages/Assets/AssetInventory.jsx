@@ -444,7 +444,7 @@ export default function AssetInventory() {
       >
         <form onSubmit={handleSaveSubmit}>
           <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+            <div className="asset-modal-grid">
               <div>
                 <label style={{ fontSize: 13, fontWeight: 600, color: "#334155", display: "block", marginBottom: 6 }}>
                   Asset Tag <span style={{ color: "#ef4444" }}>*</span>
@@ -479,7 +479,7 @@ export default function AssetInventory() {
               </div>
             </div>
 
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+            <div className="asset-modal-grid">
               <div>
                 <label style={{ fontSize: 13, fontWeight: 600, color: "#334155", display: "block", marginBottom: 6 }}>
                   Brand <span style={{ color: "#ef4444" }}>*</span>
@@ -511,7 +511,7 @@ export default function AssetInventory() {
               </div>
             </div>
 
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+            <div className="asset-modal-grid">
               <div>
                 <label style={{ fontSize: 13, fontWeight: 600, color: "#334155", display: "block", marginBottom: 6 }}>
                   Serial Number
@@ -540,7 +540,7 @@ export default function AssetInventory() {
               </div>
             </div>
 
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+            <div className="asset-modal-grid">
               <div>
                 <label style={{ fontSize: 13, fontWeight: 600, color: "#334155", display: "block", marginBottom: 6 }}>
                   Status <span style={{ color: "#ef4444" }}>*</span>

@@ -146,3 +146,56 @@
   color: #7e22ce;
   border: 1px solid #e9d5ff;
 }
+
+/* ── Calendar Horizontal Scroll Wrapper ───────────────────── */
+.holiday-cal-scroll-wrapper {
+  overflow-x: auto;
+  width: 100%;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ── Responsive Breakpoints ──────────────────────────────── */
+@media (max-width: 768px) {
+  .holiday-page {
+    padding: 16px;
+    gap: 16px;
+  }
+
+  .holiday-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .holiday-cal-grid {
+    min-width: 580px;
+    padding: 10px;
+    gap: 6px;
+  }
+
+  .holiday-cal-cell {
+    min-height: 75px;
+    padding: 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  .holiday-page {
+    padding: 12px;
+  }
+
+  .view-toggle-group {
+    width: 100%;
+    display: flex;
+  }
+
+  .view-toggle-btn {
+    flex: 1;
+    justify-content: center;
+  }
+
+  .holiday-cal-grid {
+    min-width: 520px;
+  }
+}
+

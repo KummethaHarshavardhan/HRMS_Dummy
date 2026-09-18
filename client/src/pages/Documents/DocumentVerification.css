@@ -614,3 +614,102 @@
   border: none;
   border-radius: 8px;
 }
+
+/* ── Table Horizontal Scroll ─────────────────────────────── */
+.doc-table-card .hrms-table-scroll-body {
+  overflow-x: auto;
+  width: 100%;
+  -webkit-overflow-scrolling: touch;
+}
+
+.doc-table-card .hrms-table {
+  width: 100%;
+  min-width: 780px;
+}
+
+/* ── Responsive Breakpoints ──────────────────────────────── */
+@media (max-width: 768px) {
+  .doc-verification-page {
+    padding: 16px;
+    gap: 16px;
+  }
+
+  .doc-verification-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+  }
+
+  .doc-verification-stats {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+
+  .doc-stat-card {
+    padding: 8px 12px;
+    gap: 8px;
+  }
+
+  .doc-filter-panel {
+    padding: 14px 16px;
+  }
+
+  .doc-filter-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .doc-filter-controls {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+
+  .doc-filter-group {
+    min-width: 100%;
+    width: 100%;
+  }
+
+  .reject-modal-doc-summary {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .doc-verification-page {
+    padding: 12px;
+  }
+
+  .doc-verification-stats {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .reject-modal-preview {
+    width: 70px;
+    height: 70px;
+  }
+
+  .reject-modal-filename {
+    font-size: 13px;
+  }
+
+  .reject-reason-textarea {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .full-preview-img {
+    max-height: 50vh;
+  }
+
+  .full-preview-frame {
+    height: 50vh;
+  }
+}
+

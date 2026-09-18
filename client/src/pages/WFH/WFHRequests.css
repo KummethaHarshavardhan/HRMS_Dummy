@@ -296,10 +296,13 @@
 
 .wfh-table-responsive {
   overflow-x: auto;
+  width: 100%;
+  -webkit-overflow-scrolling: touch;
 }
 
 .wfh-table {
   width: 100%;
+  min-width: 820px;
   border-collapse: collapse;
   text-align: left;
   font-size: 0.875rem;
@@ -949,4 +952,106 @@
 .wfh-hint {
   font-size: 0.75rem;
   color: #64748b;
+}
+
+/* ── Responsive Breakpoints ──────────────────────────────── */
+@media (max-width: 768px) {
+  .wfh-page-container {
+    padding: 16px;
+    gap: 1.25rem;
+  }
+
+  .wfh-page-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .wfh-refresh-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .wfh-search-box {
+    min-width: 100%;
+    max-width: 100%;
+  }
+
+  .wfh-filters-group {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .wfh-filter-item {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .wfh-select {
+    flex: 1;
+  }
+
+  .wfh-modal-info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .wfh-modal-footer-dual {
+    flex-direction: column-reverse;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .wfh-footer-actions {
+    width: 100%;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .wfh-footer-actions button,
+  .wfh-modal-footer-dual button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .wfh-page-container {
+    padding: 12px;
+  }
+
+  .wfh-stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .wfh-stat-card {
+    padding: 1rem;
+  }
+
+  .wfh-period-dates {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .wfh-period-arrow {
+    transform: rotate(90deg);
+  }
+
+  .wfh-period-total {
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .wfh-file-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .wfh-file-download-btn {
+    width: 100%;
+    justify-content: center;
+  }
 }

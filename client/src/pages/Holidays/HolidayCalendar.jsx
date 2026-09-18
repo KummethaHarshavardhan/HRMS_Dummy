@@ -328,7 +328,7 @@ export default function HolidayCalendar() {
         </div>
       ) : viewMode === "calendar" ? (
         /* Month Grid Calendar */
-        <div>
+        <div className="holiday-cal-scroll-wrapper">
           <div className="holiday-cal-grid">
             {DAY_NAMES.map((name) => (
               <div key={name} className="holiday-cal-dayname">
