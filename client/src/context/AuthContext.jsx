@@ -64,7 +64,8 @@ export function AuthProvider({ children }) {
       if (!token) return;
 
       try {
-        const res = await fetch('/api/profile', {
+        const apiBase = (import.meta.env.VITE_API_URL || '').replace(/\/+$/, '');
+        const res = await fetch(`${apiBase}/api/profile`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -72,19 +73,23 @@ export function AuthProvider({ children }) {
           }
         });
 
-        if (!res.ok) {
-          // token invalid or expired
+        if (res.status === 401 || res.status === 403) {
+          // token genuinely invalid or expired
           logout();
-        } else {
+        } else if (res.ok) {
           const data = await res.json();
           // ensure local user matches server
           if (data?.user) {
             setUser(data.user);
             localStorage.setItem('user', JSON.stringify(data.user));
           }
+        } else {
+          // For non-auth HTTP errors (404, 500, etc.), preserve the existing user session so dashboard load isn't blocked
+          console.warn(`Profile validation returned status ${res.status}; preserving local session.`);
         }
       } catch (err) {
-        logout();
+        // Network errors or temporary glitches: do NOT log out the user
+        console.warn('Profile validation network error, preserving local session:', err);
       }
     };
 

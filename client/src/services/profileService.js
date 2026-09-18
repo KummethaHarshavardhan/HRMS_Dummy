@@ -36,7 +36,8 @@ export const updateMyEmployeeProfile = async (profileData) => {
 
 export const getAllDepartments = async () => {
   const token = localStorage.getItem("token");
-  const res = await fetch("/api/departments", {
+  const apiBase = (import.meta.env.VITE_API_URL || '').replace(/\/+$/, '');
+  const res = await fetch(`${apiBase}/api/departments`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

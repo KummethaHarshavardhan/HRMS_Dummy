@@ -12,7 +12,8 @@ import { FiArrowLeft, FiCheckSquare } from "react-icons/fi";
 
 async function fetchUsers() {
   const token = localStorage.getItem("token");
-  const res = await fetch("/api/users", {
+  const apiBase = (import.meta.env.VITE_API_URL || '').replace(/\/+$/, '');
+  const res = await fetch(`${apiBase}/api/users`, {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,

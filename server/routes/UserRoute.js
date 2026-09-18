@@ -26,8 +26,8 @@ route.post("/verifyOtp", verifyOtp);
 route.post("/resetpassword", resetPassword);
 route.put("/change-password", verifyToken, changePassword);
 
-route.get("/profile", verifyToken, getProfile);
-route.put("/profile", verifyToken, updateUserProfile);
+route.get(["/profile", "/user/profile"], verifyToken, getProfile);
+route.put(["/profile", "/user/profile"], verifyToken, updateUserProfile);
 
 route.get("/users", verifyToken, authorize("Admin", "HR"), getAllUsers);
 

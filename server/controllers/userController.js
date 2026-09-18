@@ -411,9 +411,13 @@ export const changePassword = async (req, res) => {
 
 export const getProfile = async (req, res) => {
     try {
-        const user = await Employees.findById(req.user.id)
+        const userId = req.user?.id || req.user?._id;
+        const user = await Employees.findById(userId)
             .select("-password -confirm_password")
             .populate("organizationId", "name orgCode memberLimit currentMemberCount status");
+        if (!user) {
+            return res.status(404).json({ success: false, message: "User not found" });
+        }
         return res.status(200).json({ success: true, user });
     } catch (err) {
         return res.status(500).json({ success: false, message: "Error fetching profile" });
