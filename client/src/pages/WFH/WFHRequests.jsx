@@ -208,11 +208,38 @@ export default function WFHRequests() {
       fetchRequests();
     } catch (err) {
       console.error("Approval error:", err);
-      showToast("error", err.message || "Failed to approve WFH request.");
+      showToast("error", err?.response?.data?.message || err.message || "Failed to approve WFH request.");
     } finally {
       setActionLoading(false);
     }
   };
+
+  // Submit Rejection (Super Admin Only)
+  const handleConfirmReject = async () => {
+    if (!selectedRequest) return;
+    if (!rejectionReason.trim()) {
+      showToast("error", "Rejection reason is required.");
+      return;
+    }
+    setActionLoading(true);
+    try {
+      await decideWFHRequest(selectedRequest._id, {
+        decision: "Rejected",
+        rejection_reason: rejectionReason.trim(),
+      });
+      showToast("success", `WFH request rejected successfully.`);
+      setIsRejectModalOpen(false);
+      setSelectedRequest(null);
+      setRejectionReason("");
+      fetchRequests();
+    } catch (err) {
+      console.error("Rejection error:", err);
+      showToast("error", err?.response?.data?.message || err.message || "Failed to reject WFH request.");
+    } finally {
+      setActionLoading(false);
+    }
+  };
+
 
   // Open Withdraw Confirmation Modal
   const openWithdrawModal = (req) => {
