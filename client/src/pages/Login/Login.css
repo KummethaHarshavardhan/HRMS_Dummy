@@ -538,44 +538,147 @@ html:has(.login-container) {
 /* ──────────────────────────────────────
    RESPONSIVE — tablet & mobile
    ────────────────────────────────────── */
-@media (max-width: 1024px) {
-  .login-container {
-    position: relative;
-    inset: auto;
-    min-height: 100vh;
-    height: auto;
-    overflow: visible;
+@media (max-width: 900px) {
+  html:has(.login-container),
+  body:has(.login-container) {
+    overflow: auto !important;
+    height: auto !important;
+    min-height: 100vh !important;
   }
 
+  .login-container {
+    position: relative !important;
+    inset: auto !important;
+    width: 100% !important;
+    min-height: 100vh !important;
+    height: auto !important;
+    flex-direction: column !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+  }
+
+  /* Option (a): Left branding panel becomes a compact header banner on mobile */
   .login-left {
+    display: flex !important;
+    flex: 0 0 auto !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: unset !important;
+    padding: 32px 20px 22px 20px !important;
+  }
+
+  .brand-section {
+    max-width: 100% !important;
+  }
+
+  .logo-image {
+    width: 48px !important;
+    height: 48px !important;
+    margin: 0 auto 10px auto !important;
+  }
+
+  .brand-section h1 {
+    font-size: 1.45rem !important;
+    margin-bottom: 6px !important;
+  }
+
+  .brand-description {
+    font-size: 0.825rem !important;
+    line-height: 1.45 !important;
+    max-width: 380px !important;
+    margin: 0 auto !important;
+    color: #cbd5e1 !important;
+  }
+
+  .feature-cards {
+    display: none !important;
+  }
+
+  /* Mobile logo inside form is hidden since top banner has full branding */
+  .mobile-logo-header {
     display: none !important;
   }
 
   .login-right {
-    width: 100%;
-    height: auto;
-    min-height: 100vh;
-    align-items: flex-start;
-    padding: 32px 20px;
+    flex: 1 1 auto !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: unset !important;
+    padding: 24px 16px 40px 16px !important;
+    align-items: center !important;
+    overflow: visible !important;
   }
 
   .login-form-box {
-    max-width: 480px;
-    margin: 0 auto;
-  }
-
-  .mobile-logo-header {
-    display: flex;
+    max-width: 440px !important;
+    width: 100% !important;
+    margin: 0 auto !important;
   }
 }
 
 @media (max-width: 480px) {
+  .login-left {
+    padding: 24px 16px 18px 16px !important;
+  }
+
+  .logo-image {
+    width: 42px !important;
+    height: 42px !important;
+    margin: 0 auto 8px auto !important;
+  }
+
+  .brand-section h1 {
+    font-size: 1.3rem !important;
+  }
+
+  .brand-description {
+    font-size: 0.78rem !important;
+    max-width: 300px !important;
+  }
+
   .login-right {
-    padding: 24px 16px;
+    padding: 16px 12px 32px 12px !important;
   }
 
   .login-form-box {
-    padding: 28px 22px 26px 22px;
-    border-radius: 14px;
+    padding: 24px 18px 20px 18px !important;
+    border-radius: 14px !important;
+    box-shadow: 0 4px 18px rgba(15, 23, 42, 0.08) !important;
+  }
+
+  .login-form-box h2 {
+    font-size: 1.35rem !important;
+    margin-bottom: 4px !important;
+  }
+
+  .subtitle {
+    font-size: 0.825rem !important;
+    margin-bottom: 18px !important;
+  }
+
+  .login-form-box .form-group {
+    margin-bottom: 14px !important;
+  }
+
+  .login-form-box .form-group input[type="email"],
+  .login-form-box .form-group input[type="password"],
+  .login-form-box .form-group input[type="text"] {
+    padding: 10px 12px !important;
+    font-size: 0.85rem !important;
+  }
+
+  .login-form-box .btn-primary {
+    height: 42px !important;
+    margin-top: 18px !important;
+    font-size: 0.875rem !important;
+  }
+
+  .login-form-box .btn-google {
+    height: 42px !important;
+    font-size: 0.845rem !important;
+  }
+
+  .login-form-box .divider {
+    margin: 16px 0 !important;
   }
 }

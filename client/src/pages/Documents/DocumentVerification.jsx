@@ -506,7 +506,7 @@ export default function DocumentVerification() {
           </div>
 
           {/* Search bar inside toolbar */}
-          <div style={{ position: "relative", minWidth: 240 }}>
+          <div className="doc-search-wrapper">
             <FiSearch
               size={15}
               style={{
@@ -549,7 +549,7 @@ export default function DocumentVerification() {
             </div>
 
             {/* Control 2: Employee */}
-            <div className="doc-filter-group" style={{ minWidth: 240 }}>
+            <div className="doc-filter-group">
               <label htmlFor="filter-emp">Employee</label>
               <select
                 id="filter-emp"
@@ -584,10 +584,9 @@ export default function DocumentVerification() {
             {/* Refresh */}
             <button
               type="button"
-              className="doc-all-btn"
+              className="doc-all-btn doc-refresh-btn"
               onClick={fetchDocuments}
               title="Refresh document list"
-              style={{ marginLeft: "auto" }}
             >
               <FiRefreshCw size={14} />
               Refresh

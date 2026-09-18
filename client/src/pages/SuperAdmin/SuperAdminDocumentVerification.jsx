@@ -495,8 +495,8 @@ export default function SuperAdminDocumentVerification() {
             ))}
           </div>
 
-          {/* Quick Search */}
-          <div style={{ position: "relative", minWidth: 260 }}>
+          {/* Search bar inside toolbar */}
+          <div className="sa-doc-search-wrapper">
             <FiSearch
               size={15}
               style={{
@@ -510,7 +510,7 @@ export default function SuperAdminDocumentVerification() {
             <input
               type="text"
               className="sa-doc-filter-input"
-              style={{ paddingLeft: 32 }}
+              style={{ paddingLeft: 32, width: "100%" }}
               placeholder="Search by file, category, HR, org..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
@@ -521,7 +521,7 @@ export default function SuperAdminDocumentVerification() {
         <div className="sa-doc-filter-row">
           <div className="sa-doc-filter-controls">
             {/* Control 1: HR name */}
-            <div className="sa-doc-filter-group" style={{ minWidth: 260 }}>
+            <div className="sa-doc-filter-group">
               <label htmlFor="sa-filter-hr">HR name</label>
               <select
                 id="sa-filter-hr"
@@ -542,7 +542,7 @@ export default function SuperAdminDocumentVerification() {
             </div>
 
             {/* Control 2: Organization name */}
-            <div className="sa-doc-filter-group" style={{ minWidth: 260 }}>
+            <div className="sa-doc-filter-group">
               <label htmlFor="sa-filter-org">Organization name</label>
               <select
                 id="sa-filter-org"
@@ -573,10 +573,9 @@ export default function SuperAdminDocumentVerification() {
             {/* Refresh button */}
             <button
               type="button"
-              className="sa-doc-all-btn"
+              className="sa-doc-all-btn sa-doc-refresh-btn"
               onClick={fetchDocuments}
               title="Refresh document list"
-              style={{ marginLeft: "auto" }}
             >
               <FiRefreshCw size={14} />
               Refresh
