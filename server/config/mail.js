@@ -8,6 +8,9 @@ const transporter = nodemailer.createTransport({
         user: (process.env.EMAIL || "").trim(),
         pass: (process.env.EMAIL_PASS || "").replace(/\s+/g, ""),
     },
+    connectionTimeout: 10000,
+    greetingTimeout: 8000,
+    socketTimeout: 10000,
 });
 
 export default transporter;

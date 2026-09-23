@@ -301,16 +301,17 @@ export const EmpOtp=async(req ,res)=>{
     try{
         const {email}=req.body;
         console.log("Email:", email);
-        const userExist=await Employees.findOne({email});
+        const cleanEmail = String(email || '').trim().toLowerCase();
+        const userExist=await Employees.findOne({email: cleanEmail});
         if(!userExist){
-            return res.status(404).json({success:false,message:"User doesnot have any account"});
+            return res.status(404).json({success:false,message:"User does not have an account. Please check your email or contact HR."});
         }
 
         const otp=Math.floor(100000 + Math.random()*900000).toString();
 
         await FORGOT.findOneAndUpdate(
-            {email},{
-                email,
+            {email: cleanEmail},{
+                email: cleanEmail,
                 otp,
                 otpExpiry:Date.now()+5*60*1000
             },

@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './ForgotPassword.css';
 import logo from '../../assets/infinetra-logo.png';
@@ -24,8 +24,18 @@ function ForgotPassword() {
   const [loading, setLoading] = useState(false);
   const [isWakingUp, setIsWakingUp] = useState(false);
   const [hasFailed, setHasFailed] = useState(false);
+  const [inlineError, setInlineError] = useState('');
 
+  const wakeupTimerRef = useRef(null);
+  const timeoutRef = useRef(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    return () => {
+      if (wakeupTimerRef.current) clearTimeout(wakeupTimerRef.current);
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
+  }, []);
 
   useEffect(() => {
     if (!message) return;
@@ -33,7 +43,7 @@ function ForgotPassword() {
     const timer = setTimeout(() => {
       setMessage('');
       setStatus('');
-    }, 3000);
+    }, 3500);
 
     return () => clearTimeout(timer);
   }, [message]);
@@ -47,42 +57,58 @@ function ForgotPassword() {
     e.preventDefault();
 
     if (!email.trim()) {
-      showPopup('Please enter your registered email address.', 'error');
+      const err = 'Please enter your registered email address.';
+      setInlineError(err);
+      showPopup(err, 'error');
       return;
     }
 
+    // Clean up any existing timers & reset states
+    if (wakeupTimerRef.current) clearTimeout(wakeupTimerRef.current);
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    setInlineError('');
+    setIsWakingUp(false);
+    setHasFailed(false);
+
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => {
+    timeoutRef.current = setTimeout(() => {
       controller.abort();
     }, 50000); // 50s timeout for Render free-tier cold-boot
 
-    const wakeupTimer = setTimeout(() => {
+    wakeupTimerRef.current = setTimeout(() => {
       setIsWakingUp(true);
     }, 3500); // Show helpful notice if response takes > 3.5s
 
     try {
       setLoading(true);
-      setHasFailed(false);
 
       const data = await sendOtp(email.trim(), { signal: controller.signal });
 
-      clearTimeout(wakeupTimer);
-      clearTimeout(timeoutId);
+      // Immediate cleanup on success
+      if (wakeupTimerRef.current) clearTimeout(wakeupTimerRef.current);
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
       setIsWakingUp(false);
+      setInlineError('');
+
       showPopup(data.message || 'OTP sent successfully.', 'success');
       setStep('verify');
 
     } catch (error) {
-      clearTimeout(wakeupTimer);
-      clearTimeout(timeoutId);
+      // Immediate cleanup on error response
+      if (wakeupTimerRef.current) clearTimeout(wakeupTimerRef.current);
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
       setIsWakingUp(false);
       setHasFailed(true);
+
+      const errorMsg = error?.message || 'Failed to send OTP.';
+      setInlineError(errorMsg);
       console.error('Send OTP error:', error);
-      showPopup(error.message || 'Failed to send OTP.', 'error');
+      showPopup(errorMsg, 'error');
 
     } finally {
-      clearTimeout(wakeupTimer);
-      clearTimeout(timeoutId);
+      if (wakeupTimerRef.current) clearTimeout(wakeupTimerRef.current);
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+      setIsWakingUp(false);
       setLoading(false);
     }
   };
@@ -246,10 +272,21 @@ function ForgotPassword() {
                   <input
                     type="email"
                     value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                      if (inlineError) setInlineError('');
+                    }}
                     placeholder="name@company.com"
+                    disabled={loading}
                   />
                 </div>
+
+                {inlineError && !loading && (
+                  <div className="form-error-notice">
+                    <span className="error-icon">⚠️</span>
+                    <span>{inlineError}</span>
+                  </div>
+                )}
 
                 {isWakingUp && loading && (
                   <div className="server-wakeup-notice">
