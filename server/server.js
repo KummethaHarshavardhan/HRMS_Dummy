@@ -138,10 +138,12 @@ connectDB().then(async () => {
     await seedInitialTaskData();
 });
 
-app.get("/", (req, res) => {
+app.get(["/", "/health", "/api/health"], (req, res) => {
     res.json({
         success: true,
         message: "HRMS API Server is Running",
+        status: "ok",
+        timestamp: new Date().toISOString()
     });
 });
 
