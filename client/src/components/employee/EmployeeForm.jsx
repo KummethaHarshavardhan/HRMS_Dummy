@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { FiEye, FiEyeOff } from "react-icons/fi";
 import "../employee/emp.shared.css";
 import "../employee/EmployeeForm.css";
 
@@ -6,6 +7,7 @@ const EMPTY = {
   user_id: "",
   name: "",
   email: "",
+  password: "",
   phone: "",
   role: "Employee",
   department_id: "",
@@ -32,7 +34,13 @@ export default function EmployeeForm({
   const [form, setForm] = useState({ ...EMPTY, ...initialData });
   const [errors, setErrors] = useState({});
   const [userSearch, setUserSearch] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const initialDataStr = JSON.stringify(initialData);
+
+  const isExistingUser = Boolean(
+    (form.user_id && users.some((u) => (u._id || u.id) === form.user_id)) ||
+    (form.email && users.some((u) => u.email?.toLowerCase() === form.email.trim().toLowerCase()))
+  );
 
   const DEFAULT_DEPT_NAMES = [
     "Human Resource",
@@ -133,6 +141,14 @@ export default function EmployeeForm({
       }
     }
 
+    if (!isEditMode && !isExistingUser) {
+      if (!form.password || !form.password.trim()) {
+        errs.password = "Password is required";
+      } else if (form.password.length < 8) {
+        errs.password = "Password must be at least 8 characters";
+      }
+    }
+
     if (form.phone && form.phone.trim()) {
       const cleaned = form.phone.replace(/\D/g, "");
       if (cleaned.length !== 10) {
@@ -177,6 +193,9 @@ export default function EmployeeForm({
       bank_account_number: form.bank_account_number ? form.bank_account_number.trim() : "",
       pf_percentage: form.pf_percentage !== undefined ? Number(form.pf_percentage) : 12,
     };
+    if (!isEditMode && !finalUserId && form.password) {
+      payload.password = form.password;
+    }
     onSubmit(payload);
   };
 
@@ -273,6 +292,41 @@ export default function EmployeeForm({
             )}
           </div>
 
+          {/* Password (for New Employee) */}
+          {!isEditMode && (
+            <div className="emp-form-group">
+              <label className="emp-form-label">
+                Password {isExistingUser ? <span style={{ color: "#64748b", fontWeight: 400, fontSize: "0.8rem" }}>(Existing user - unchanged)</span> : <span>*</span>}
+              </label>
+              <div className="emp-password-wrapper">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  name="password"
+                  className={`emp-form-input${errors.password ? " error" : ""}`}
+                  placeholder={isExistingUser ? "Existing password preserved" : "Enter password"}
+                  value={form.password || ""}
+                  onChange={handleChange}
+                  disabled={isExistingUser}
+                  autoComplete="new-password"
+                />
+                {!isExistingUser && (
+                  <button
+                    type="button"
+                    className="emp-password-toggle-btn"
+                    onClick={() => setShowPassword((prev) => !prev)}
+                    aria-label={showPassword ? "Hide password" : "Show password"}
+                    title={showPassword ? "Hide password" : "Show password"}
+                  >
+                    {showPassword ? <FiEyeOff size={16} /> : <FiEye size={16} />}
+                  </button>
+                )}
+              </div>
+              {errors.password && (
+                <span className="emp-field-error">{errors.password}</span>
+              )}
+            </div>
+          )}
+
           {/* System Role */}
           <div className="emp-form-group">
             <label className="emp-form-label">System Role</label>
@@ -286,24 +340,6 @@ export default function EmployeeForm({
               <option value="HR Manager">HR Manager</option>
               <option value="Admin">Admin</option>
             </select>
-          </div>
-
-          {/* Designation */}
-          <div className="emp-form-group">
-            <label className="emp-form-label">
-              Designation <span>*</span>
-            </label>
-            <input
-              type="text"
-              name="designation"
-              className={`emp-form-input${errors.designation ? " error" : ""}`}
-              placeholder="e.g. Senior Software Engineer"
-              value={form.designation}
-              onChange={handleChange}
-            />
-            {errors.designation && (
-              <span className="emp-field-error">{errors.designation}</span>
-            )}
           </div>
 
           {/* Department */}
@@ -326,6 +362,24 @@ export default function EmployeeForm({
             </select>
             {errors.department_id && (
               <span className="emp-field-error">{errors.department_id}</span>
+            )}
+          </div>
+
+          {/* Designation */}
+          <div className="emp-form-group">
+            <label className="emp-form-label">
+              Designation <span>*</span>
+            </label>
+            <input
+              type="text"
+              name="designation"
+              className={`emp-form-input${errors.designation ? " error" : ""}`}
+              placeholder="e.g. Senior Software Engineer"
+              value={form.designation}
+              onChange={handleChange}
+            />
+            {errors.designation && (
+              <span className="emp-field-error">{errors.designation}</span>
             )}
           </div>
 

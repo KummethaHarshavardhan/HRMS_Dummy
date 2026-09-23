@@ -20,47 +20,81 @@ function Login() {
   const { login } = useAuth();
   const { showToast } = useToast();
   const googleButtonRef = useRef(null);
-
+  const [googleAuthStatus, setGoogleAuthStatus] = useState('loading'); // 'loading' | 'ready' | 'failed'
+  const [googleAuthErrorMsg, setGoogleAuthErrorMsg] = useState('');
+  const isGoogleProcessing = useRef(false);
 
   useEffect(() => {
     const scriptId = 'google-identity-script';
 
     const initializeGoogleSignIn = () => {
-      if (window.google && window.google.accounts && window.google.accounts.id) {
+      try {
         const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
 
         if (!clientId) {
           console.error('VITE_GOOGLE_CLIENT_ID is missing - check client/.env');
+          setGoogleAuthStatus('failed');
+          setGoogleAuthErrorMsg('Google Sign-In configuration is missing.');
           return;
         }
 
-        window.google.accounts.id.initialize({
-          client_id: clientId,
-          callback: handleGoogleResponse
-        });
-
-        if (googleButtonRef.current) {
-          window.google.accounts.id.renderButton(googleButtonRef.current, {
-            theme: 'outline',
-            size: 'large',
-            width: 300
+        if (window.google && window.google.accounts && window.google.accounts.id) {
+          window.google.accounts.id.initialize({
+            client_id: clientId,
+            callback: handleGoogleResponse
           });
+
+          if (googleButtonRef.current) {
+            window.google.accounts.id.renderButton(googleButtonRef.current, {
+              theme: 'outline',
+              size: 'large',
+              width: 300
+            });
+          }
+          setGoogleAuthStatus('ready');
         }
+      } catch (err) {
+        console.error('Failed to initialize Google Sign-In:', err);
+        setGoogleAuthStatus('failed');
+        setGoogleAuthErrorMsg('Google Sign-In failed to initialize. Please refresh the page.');
       }
     };
 
-    if (document.getElementById(scriptId)) {
-      initializeGoogleSignIn();
-      return;
+    const existingScript = document.getElementById(scriptId);
+    if (existingScript) {
+      if (window.google && window.google.accounts && window.google.accounts.id) {
+        initializeGoogleSignIn();
+      } else {
+        existingScript.addEventListener('load', initializeGoogleSignIn);
+        existingScript.addEventListener('error', () => {
+          setGoogleAuthStatus('failed');
+          setGoogleAuthErrorMsg('Failed to load Google Sign-In. Please check your network connection.');
+        });
+      }
+    } else {
+      const script = document.createElement('script');
+      script.id = scriptId;
+      script.src = 'https://accounts.google.com/gsi/client';
+      script.async = true;
+      script.defer = true;
+      script.onload = initializeGoogleSignIn;
+      script.onerror = () => {
+        setGoogleAuthStatus('failed');
+        setGoogleAuthErrorMsg('Failed to load Google Sign-In. Please check your network connection.');
+      };
+      document.body.appendChild(script);
     }
 
-    const script = document.createElement('script');
-    script.id = scriptId;
-    script.src = 'https://accounts.google.com/gsi/client';
-    script.async = true;
-    script.defer = true;
-    script.onload = initializeGoogleSignIn;
-    document.body.appendChild(script);
+    // Reset Google processing flag when window regains focus (e.g. if user cancels Google popup)
+    const handleWindowFocus = () => {
+      setTimeout(() => {
+        isGoogleProcessing.current = false;
+      }, 1000);
+    };
+    window.addEventListener('focus', handleWindowFocus);
+    return () => {
+      window.removeEventListener('focus', handleWindowFocus);
+    };
   }, []);
 
   const handleGoogleResponse = async (response) => {
@@ -100,22 +134,48 @@ function Login() {
       }
     } finally {
       setLoading(false);
+      isGoogleProcessing.current = false;
     }
   };
 
   const handleGoogleClick = () => {
+    // Prevent multiple simultaneous Google Sign-In requests
+    if (loading || isGoogleProcessing.current) {
+      return;
+    }
+
+    // If Google authentication initialization permanently failed, show authentication error
+    if (googleAuthStatus === 'failed') {
+      showToast(
+        'error',
+        googleAuthErrorMsg || 'Google Sign-In is unavailable. Please try again later.'
+      );
+      return;
+    }
+
     const realGoogleButton = googleButtonRef.current
-      ? googleButtonRef.current.querySelector('div[role="button"]')
+      ? (googleButtonRef.current.querySelector('div[role="button"]') ||
+         googleButtonRef.current.querySelector('iframe') ||
+         googleButtonRef.current.querySelector('[role="button"]'))
       : null;
 
-    if (realGoogleButton) {
-      realGoogleButton.click();
-    } else {
+    // Check if Google authentication is ready before starting sign-in
+    const isGoogleReady =
+      googleAuthStatus === 'ready' &&
+      Boolean(window.google && window.google.accounts && window.google.accounts.id) &&
+      Boolean(realGoogleButton);
+
+    if (!isGoogleReady) {
       showToast(
         'error',
         'Google Sign-In is still loading. Please try again.'
       );
+      return;
     }
+
+    // Start the existing Google Sign-In flow normally
+    isGoogleProcessing.current = true;
+    realGoogleButton.click();
   };
 
   const openPasskeyModal = () => {

@@ -148,6 +148,7 @@ export const createEmployee = async (req, res) => {
       user_id,
       name,
       email,
+      password,
       phone,
       role,
       department_id,
@@ -290,14 +291,29 @@ export const createEmployee = async (req, res) => {
         const userPhone = phone ? String(phone).replace(/\D/g, "") : "0000000000";
         const userRole = isSuperAdmin && role ? role : "Employee";
 
-        // Generate strong hashed password that matches policy: Emp@12345
-        const defaultHash = await bcrypt.hash("Emp@12345", 10);
+        // Validate password for new user account
+        if (!password || !String(password).trim()) {
+          return res.status(400).json({
+            success: false,
+            message: "Password is required",
+          });
+        }
+
+        if (String(password).length < 8) {
+          return res.status(400).json({
+            success: false,
+            message: "Password must be at least 8 characters",
+          });
+        }
+
+        // Hash password securely with bcrypt
+        const hashedPassword = await bcrypt.hash(String(password), 10);
 
         existingUser = await User.create({
           name: userName,
           email: targetEmail,
           phone: userPhone.length === 10 ? userPhone : "9876543210",
-          password: defaultHash,
+          password: hashedPassword,
           role: userRole,
           department: deptName,
           organizationId: orgId || null,
