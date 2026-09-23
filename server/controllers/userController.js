@@ -319,7 +319,6 @@ export const EmpOtp=async(req ,res)=>{
                 returnDocument:"after"
             }
         );
-        await transporter.verify();
         await transporter.sendMail({
             from:process.env.EMAIL,
             to:email,
