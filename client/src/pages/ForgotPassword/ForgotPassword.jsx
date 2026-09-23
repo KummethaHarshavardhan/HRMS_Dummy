@@ -73,7 +73,7 @@ function ForgotPassword() {
     const controller = new AbortController();
     timeoutRef.current = setTimeout(() => {
       controller.abort();
-    }, 50000); // 50s timeout for Render free-tier cold-boot
+    }, 65000); // 65s safety net for Render free-tier cold-boot
 
     wakeupTimerRef.current = setTimeout(() => {
       setIsWakingUp(true);
