@@ -25,6 +25,9 @@ const requestJson = async (url, options = {}) => {
 
     return data;
   } catch (error) {
+    if (error?.name === 'AbortError') {
+      throw new Error("Request timed out. The server was waking up — please click Retry.");
+    }
     if (error instanceof Error) {
       throw new Error(error.message || "Failed to fetch");
     }
@@ -125,18 +128,19 @@ export const updateProfile = async (profileData) => {
 
 
 
-export const sendOtp = async (email) => {
+export const sendOtp = async (email, options = {}) => {
   return requestJson(`${API_URL}/sendOtp`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify({ email })
+    body: JSON.stringify({ email }),
+    ...options
   });
 };
 
 
-export const verifyOtp = async (email, otp) => {
+export const verifyOtp = async (email, otp, options = {}) => {
   return requestJson(`${API_URL}/verifyOtp`, {
     method: "POST",
     headers: {
@@ -145,7 +149,8 @@ export const verifyOtp = async (email, otp) => {
     body: JSON.stringify({
       email,
       otp
-    })
+    }),
+    ...options
   });
 };
 

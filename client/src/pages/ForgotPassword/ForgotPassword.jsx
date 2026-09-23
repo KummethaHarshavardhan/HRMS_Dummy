@@ -22,6 +22,8 @@ function ForgotPassword() {
   const [message, setMessage] = useState('');
   const [status, setStatus] = useState('');
   const [loading, setLoading] = useState(false);
+  const [isWakingUp, setIsWakingUp] = useState(false);
+  const [hasFailed, setHasFailed] = useState(false);
 
   const navigate = useNavigate();
 
@@ -49,19 +51,38 @@ function ForgotPassword() {
       return;
     }
 
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => {
+      controller.abort();
+    }, 50000); // 50s timeout for Render free-tier cold-boot
+
+    const wakeupTimer = setTimeout(() => {
+      setIsWakingUp(true);
+    }, 3500); // Show helpful notice if response takes > 3.5s
+
     try {
       setLoading(true);
+      setHasFailed(false);
 
-      const data = await sendOtp(email.trim());
+      const data = await sendOtp(email.trim(), { signal: controller.signal });
 
+      clearTimeout(wakeupTimer);
+      clearTimeout(timeoutId);
+      setIsWakingUp(false);
       showPopup(data.message || 'OTP sent successfully.', 'success');
       setStep('verify');
 
     } catch (error) {
+      clearTimeout(wakeupTimer);
+      clearTimeout(timeoutId);
+      setIsWakingUp(false);
+      setHasFailed(true);
       console.error('Send OTP error:', error);
       showPopup(error.message || 'Failed to send OTP.', 'error');
 
     } finally {
+      clearTimeout(wakeupTimer);
+      clearTimeout(timeoutId);
       setLoading(false);
     }
   };
@@ -230,12 +251,26 @@ function ForgotPassword() {
                   />
                 </div>
 
+                {isWakingUp && loading && (
+                  <div className="server-wakeup-notice">
+                    <span className="notice-icon">⏳</span>
+                    <span>Server is starting up (cold start). Please hold on, this can take up to a minute on the first request...</span>
+                  </div>
+                )}
+
                 <button
                   type="submit"
-                  className="btn-primary"
+                  className="btn-primary btn-with-spinner"
                   disabled={loading}
                 >
-                  {loading ? 'Sending...' : 'Send OTP'}
+                  {loading ? (
+                    <>
+                      <span className="spinner-inline" />
+                      <span>{isWakingUp ? 'Waking up server...' : 'Sending OTP...'}</span>
+                    </>
+                  ) : (
+                    hasFailed ? 'Retry Send OTP' : 'Send OTP'
+                  )}
                 </button>
               </form>
             </>
@@ -264,10 +299,17 @@ function ForgotPassword() {
 
                 <button
                   type="submit"
-                  className="btn-primary"
+                  className="btn-primary btn-with-spinner"
                   disabled={loading}
                 >
-                  {loading ? 'Verifying...' : 'Verify OTP'}
+                  {loading ? (
+                    <>
+                      <span className="spinner-inline" />
+                      <span>Verifying...</span>
+                    </>
+                  ) : (
+                    'Verify OTP'
+                  )}
                 </button>
               </form>
             </>
@@ -339,10 +381,17 @@ function ForgotPassword() {
 
                 <button
                   type="submit"
-                  className="btn-primary"
+                  className="btn-primary btn-with-spinner"
                   disabled={loading}
                 >
-                  {loading ? 'Resetting...' : 'Reset Password'}
+                  {loading ? (
+                    <>
+                      <span className="spinner-inline" />
+                      <span>Resetting...</span>
+                    </>
+                  ) : (
+                    'Reset Password'
+                  )}
                 </button>
 
               </form>
