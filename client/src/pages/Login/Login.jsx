@@ -20,6 +20,7 @@ function Login() {
   const { login } = useAuth();
   const { showToast } = useToast();
   const googleButtonRef = useRef(null);
+  const [isGoogleReady, setIsGoogleReady] = useState(false);
   const [googleInitFailed, setGoogleInitFailed] = useState(false);
 
   useEffect(() => {
@@ -45,8 +46,9 @@ function Login() {
             window.google.accounts.id.renderButton(googleButtonRef.current, {
               theme: 'outline',
               size: 'large',
-              width: 300
+              width: 350
             });
+            setIsGoogleReady(true);
           }
         }
       } catch (err) {
@@ -75,6 +77,16 @@ function Login() {
       setGoogleInitFailed(true);
     };
     document.body.appendChild(script);
+
+    // Fallback poller to ensure initialization completes as soon as script is ready
+    const poller = setInterval(() => {
+      if (window.google && window.google.accounts && window.google.accounts.id) {
+        clearInterval(poller);
+        initializeGoogleSignIn();
+      }
+    }, 150);
+
+    return () => clearInterval(poller);
   }, []);
 
   const handleGoogleResponse = async (response) => {
@@ -131,17 +143,17 @@ function Login() {
       return;
     }
 
-    const realGoogleButton = googleButtonRef.current
-      ? googleButtonRef.current.querySelector('div[role="button"]')
-      : null;
-
-    if (realGoogleButton) {
-      realGoogleButton.click();
-    } else {
+    if (!isGoogleReady) {
       showToast(
         'error',
         'Google Sign-In is still loading. Please try again.'
       );
+      return;
+    }
+
+    // Programmatic trigger when invoked via keyboard or outside overlay
+    if (window.google && window.google.accounts && window.google.accounts.id) {
+      window.google.accounts.id.prompt();
     }
   };
 
@@ -370,24 +382,35 @@ function Login() {
               <span></span>
             </div>
 
-            <div
-              ref={googleButtonRef}
-              style={{
-                position: 'absolute',
-                top: '-9999px',
-                left: '-9999px'
-              }}
-            ></div>
+            <div style={{ position: 'relative', width: '100%' }}>
+              <button
+                type="button"
+                className="btn-google"
+                onClick={handleGoogleClick}
+                disabled={loading}
+              >
+                <span className="google-icon">G</span>
+                &nbsp;&nbsp;Sign in with Google
+              </button>
 
-            <button
-              type="button"
-              className="btn-google"
-              onClick={handleGoogleClick}
-              disabled={loading}
-            >
-              <span className="google-icon">G</span>
-              &nbsp;&nbsp;Sign in with Google
-            </button>
+              <div
+                ref={googleButtonRef}
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  width: '100%',
+                  height: '100%',
+                  opacity: isGoogleReady ? 0.001 : 0,
+                  pointerEvents: isGoogleReady && !loading ? 'auto' : 'none',
+                  overflow: 'hidden',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  zIndex: 2,
+                }}
+              ></div>
+            </div>
 
           </form>
 
