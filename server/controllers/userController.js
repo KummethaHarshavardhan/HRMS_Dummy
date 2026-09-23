@@ -321,16 +321,19 @@ export const EmpOtp=async(req ,res)=>{
             }
         );
         await transporter.sendMail({
-            from:process.env.EMAIL,
-            to:email,
-            subject:"password Reset OTP",
-            text:`Your OTP is ${otp}.It is valid for 5 min`
+            from: process.env.EMAIL,
+            to: cleanEmail,
+            subject: "password Reset OTP",
+            text: `Your OTP is ${otp}. It is valid for 5 min`,
         });
-        return res.status(200).json({success:true,message:"OTP send Successfully"})
+        return res.status(200).json({ success: true, message: "OTP sent successfully" });
 
-    }catch(err){
-        console.log(err)
-        return res.status(500).json({success:false,message:"Invalid Request"})
+    } catch (err) {
+        console.error("EmpOtp error:", err);
+        return res.status(500).json({
+            success: false,
+            message: err.message || "Failed to send OTP email"
+        });
     }
 };
 
